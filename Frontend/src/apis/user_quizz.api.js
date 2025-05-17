@@ -44,12 +44,32 @@ export const useSubmitQuiz = (onSuccess, onError) => {
 };
 
 // Hook để lấy danh sách bài kiểm tra của user
-export const useUserQuizzes = (onSuccess, onError) => {
+// export const useUserQuizzes = (onSuccess, onError) => {
+//   return useQuery({
+//     queryKey: ["user-quizzes"],
+//     queryFn: async () => {
+//       try {
+//         const response = await quizzesApi.getUserQuizzes();
+//         console.log("API Response:", response);
+//         return response;
+//       } catch (error) {
+//         console.error("API Fetch Error:", error);
+//         throw error;
+//       }
+//     },
+//     onSuccess,
+//     onError,
+//     staleTime: 5 * 60 * 1000,
+//     cacheTime: 10 * 60 * 1000,
+//   });
+// };
+
+export const useUserQuizzes = (page = 1, limit = 5, onSuccess, onError) => {
   return useQuery({
-    queryKey: ["user-quizzes"],
+    queryKey: ["user-quizzes", page, limit], // Thêm page và limit vào queryKey để cache riêng từng trang
     queryFn: async () => {
       try {
-        const response = await quizzesApi.getUserQuizzes();
+        const response = await quizzesApi.getUserQuizzes(page, limit); // Truyền page và limit vào API
         console.log("API Response:", response);
         return response;
       } catch (error) {
@@ -59,8 +79,8 @@ export const useUserQuizzes = (onSuccess, onError) => {
     },
     onSuccess,
     onError,
-    staleTime: 5 * 60 * 1000,
-    cacheTime: 10 * 60 * 1000,
+    staleTime: 5 * 60 * 1000, // Dữ liệu cũ trong 5 phút
+    cacheTime: 10 * 60 * 1000, // Cache trong 10 phút
   });
 };
 

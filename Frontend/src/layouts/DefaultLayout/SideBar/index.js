@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu } from "antd";
+import { Badge, Layout, Menu } from "antd";
 import {
   HomeOutlined,
   BookOutlined,
@@ -10,12 +10,15 @@ import {
   BellOutlined,
 } from "@ant-design/icons";
 import { Link, NavLink, useLocation } from "react-router-dom";
-//import Notification from "../../../pages/Notification";
+import { useGetNotifications } from "../../../apis/notification.api";
 
 const { Sider } = Layout;
 
 const Sidebar = () => {
-const location = useLocation();
+  const location = useLocation();
+  const { data: notificationsData } = useGetNotifications();
+  const unreadCount = notificationsData?.filter((n) => !n.seen).length || 0;
+
   return (
     <Sider
       width={250}
@@ -23,24 +26,23 @@ const location = useLocation();
         height: "100vh",
         position: "fixed",
         left: 0,
-        top: 64, // Để không bị chồng lên Navigation
-        backgroundColor: "#001529",
+        top: 70, 
+        backgroundColor: "white",
         color: "white",
         transition: "0.3s",
+        
       }}
     >
-      <Menu theme="dark" mode="vertical" selectedKeys={[location.pathname]}>
+      <Menu mode="vertical" selectedKeys={[location.pathname]}>
         <Menu.Item key="/" icon={<HomeOutlined />}>
-          <NavLink to="/" >
-            Trang chủ
-          </NavLink>
+          <NavLink to="/">Trang chủ</NavLink>
         </Menu.Item>
         <Menu.Item key="/usercourse" icon={<BookOutlined />}>
           <NavLink to="/usercourse">Khoá học của tôi</NavLink>
         </Menu.Item>
         <Menu.Item key="/list-exams?subject=all" icon={<FileTextOutlined />}>
           <NavLink to="/list-exams?subject=all" className="desktop-item">
-            Môn thi
+            Đề thi
           </NavLink>
         </Menu.Item>
         <Menu.Item key="/disscusion" icon={<MessageOutlined />}>
@@ -55,8 +57,18 @@ const location = useLocation();
         <Menu.Item key="/contact" icon={<ContactsOutlined />}>
           <NavLink to="/contact">Liên hệ</NavLink>
         </Menu.Item>
-        <Menu.Item key="/notifications" icon={<BellOutlined />}>
-          <NavLink to="/notifications" style={{ display: "inline-flex", alignItems: "center" }}>
+        <Menu.Item
+          key="/notifications"
+          icon={
+            <Badge count={unreadCount} size="small" offset={[5, -2]}>
+              <BellOutlined />
+            </Badge>
+          }
+        >
+          <NavLink
+            to="/notifications"
+            style={{ display: "inline-flex", alignItems: "center" }}
+          >
             Thông báo
           </NavLink>
         </Menu.Item>

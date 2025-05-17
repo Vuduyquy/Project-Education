@@ -2,25 +2,25 @@ nav.nav-app {
 	position: sticky;
 	z-index: 99;
 	width: 100%;
-	background: #001529;
-}
-.wrapper .logo a {
+	background: #08b1ff;
+  }
+  .wrapper .logo a {
 	color: #f2f2f2;
 	font-size: 30px;
 	font-weight: 600;
 	text-decoration: none;
-}
-.wrapper .nav-links {
+  }
+  .wrapper .nav-links {
 	display: inline-flex;
-}
-.nav-links li {
+  }
+  .nav-links li {
 	list-style: none;
 	margin: 0px 8px;
-}
-.nav-links .drop-menu li {
+  }
+  .nav-links .drop-menu li {
 	margin: 0px;
-}
-.nav-links li a {
+  }
+  .nav-links li a {
 	color: #f2f2f2;
 	text-decoration: none;
 	font-size: 18px;
@@ -28,44 +28,69 @@ nav.nav-app {
 	padding: 9px 15px;
 	border-radius: 5px;
 	transition: all 0.3s ease;
-}
-.nav-links li a:hover {
-	background: #3a3b3c;
-}
-.nav-links li a.active {
-	background: #3a3b3c;
-}
-.nav-links .mobile-item {
+  }
+  .nav-links li a:hover {
+	color: #e5e7eb;
+	font-size: 20px;
+	font-weight: 600;
+	text-decoration: none;
+	background: rgba(255, 255, 255, 0.1); /* nền nhạt hơn để nổi bật */
+	transition: all 0.3s ease;
+  }
+  .nav-links li a.active {
+	background: #08b1ff;
+  }
+  .nav-links .mobile-item {
 	display: none;
-}
-.nav-links .drop-menu {
+  }
+  .nav-links .drop-menu {
 	position: absolute;
-	background: #242526;
-	width: 180px;
+	background: #08b1ff;
+	min-width: 280px;
+	width: auto;
 	line-height: 45px;
 	top: 85px;
 	opacity: 0;
 	visibility: hidden;
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-.nav-links li:hover .drop-menu,
-.nav-links li:hover .mega-box {
+	max-height: 500px; /* Thêm: Giới hạn chiều cao tối đa */
+	overflow-y: auto; /* Thêm: Kích hoạt thanh cuộn dọc */
+	overflow-x: hidden; /* Thêm: Ẩn thanh cuộn ngang */
+	padding: 10px; /* Thêm: Padding để đẹp hơn */
+  }
+  /* Thêm: Tùy chỉnh thanh cuộn */
+  .nav-links .drop-menu::-webkit-scrollbar {
+	width: 8px;
+  }
+  .nav-links .drop-menu::-webkit-scrollbar-track {
+	background: #08b1ff; /* Màu nền track phù hợp với dropdown */
+  }
+  .nav-links .drop-menu::-webkit-scrollbar-thumb {
+	background: #fff; /* Màu thanh cuộn */
+	border-radius: 4px;
+  }
+  .nav-links .drop-menu::-webkit-scrollbar-thumb:hover {
+	background: #e5e7eb; /* Màu khi hover */
+  }
+  .nav-links li:hover .drop-menu,
+  .nav-links li:hover .mega-box {
 	transition: all 0.3s ease;
 	top: 70px;
 	opacity: 1;
 	visibility: visible;
-}
-.drop-menu li a {
+  }
+  .drop-menu li a {
 	width: 100%;
 	display: block;
-	padding: 0 0 0 15px;
+	padding: 0 15px 0 15px;
 	font-weight: 400;
 	border-radius: 0px;
-}
-.drop-menu li a:hover {
+	white-space: nowrap;
+  }
+  .drop-menu li a:hover {
 	transform: translateX(6px);
-}
-.mega-box {
+  }
+  .mega-box {
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -73,183 +98,201 @@ nav.nav-app {
 	top: 85px;
 	opacity: 0;
 	visibility: hidden;
-}
-.mega-box .content {
+  }
+  .mega-box .content {
 	background: #242526;
 	padding: 25px 20px;
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
 	box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-.mega-box .content .row {
+  }
+  .mega-box .content .row {
 	width: calc(25% - 30px);
 	line-height: 45px;
-}
-.content .row img {
+  }
+  .content .row img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-}
-.content .row header {
+  }
+  .content .row header {
 	color: #f2f2f2;
 	font-size: 20px;
 	font-weight: 500;
-}
-.content .row .mega-links {
+  }
+  .content .row .mega-links {
 	margin-left: -40px;
 	border-left: 1px solid rgba(255, 255, 255, 0.09);
-}
-.row .mega-links li {
+  }
+  .row .mega-links li {
 	padding: 0 20px;
-}
-.row .mega-links li a {
+  }
+  .row .mega-links li a {
 	padding: 0px;
 	padding: 0 20px;
 	color: #d9d9d9;
 	font-size: 17px;
 	display: block;
-}
-.row .mega-links li a:hover {
+  }
+  .row .mega-links li a:hover {
 	color: #f2f2f2;
-}
-.wrapper .btn {
+  }
+  .wrapper .btn {
 	color: #fff;
 	font-size: 20px;
 	cursor: pointer;
 	display: none;
-}
-.wrapper .btn.close-btn {
+  }
+  .wrapper .btn.close-btn {
 	position: absolute;
 	right: 30px;
 	top: 10px;
-}
-
-@media screen and (max-width: 970px) {
+  }
+  
+  @media screen and (max-width: 970px) {
 	.wrapper .btn {
-		display: block;
+	  display: block;
 	}
 	.wrapper .nav-links {
-		position: fixed;
-		height: 100vh;
-		width: 100%;
-		max-width: 350px;
-		top: 0;
-		left: -100%;
-		background: #242526;
-		display: block;
-		padding: 50px 10px;
-		line-height: 50px;
-		overflow-y: auto;
-		box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.18);
-		transition: all 0.3s ease;
+	  position: fixed;
+	  height: 100vh;
+	  width: 100%;
+	  max-width: 350px;
+	  top: 0;
+	  left: -100%;
+	  background: #242526;
+	  display: block;
+	  padding: 50px 10px;
+	  line-height: 50px;
+	  overflow-y: auto;
+	  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.18);
+	  transition: all 0.3s ease;
 	}
 	/* custom scroll bar */
 	::-webkit-scrollbar {
-		width: 10px;
+	  width: 10px;
 	}
 	::-webkit-scrollbar-track {
-		background: #242526;
+	  background: #242526;
 	}
 	::-webkit-scrollbar-thumb {
-		background: #3a3b3c;
+	  background: #3a3b3c;
 	}
 	#menu-btn:checked ~ .nav-links {
-		left: 0%;
+	  left: 0%;
 	}
 	#menu-btn:checked ~ .btn.menu-btn {
-		display: none;
+	  display: none;
 	}
 	#close-btn:checked ~ .btn.menu-btn {
-		display: block;
+	  display: block;
 	}
 	.nav-links li {
-		margin: 15px 10px;
+	  margin: 15px 10px;
 	}
 	.nav-links li a {
-		padding: 0 20px;
-		display: block;
-		font-size: 20px;
+	  padding: 0 20px;
+	  display: block;
+	  font-size: 20px;
 	}
 	.nav-links .drop-menu {
-		position: static;
-		opacity: 1;
-		top: 65px;
-		visibility: visible;
-		padding-left: 20px;
-		width: 100%;
-		max-height: 0px;
-		overflow: hidden;
-		box-shadow: none;
-		transition: all 0.3s ease;
+	  position: static;
+	  opacity: 1;
+	  top: 65px;
+	  visibility: visible;
+	  padding-left: 20px;
+	  width: 100%;
+	  max-height: 300px; /* Thêm: Giới hạn chiều cao tối đa cho mobile */
+	  overflow-y: auto; /* Thêm: Kích hoạt thanh cuộn dọc */
+	  overflow-x: hidden; /* Thêm: Ẩn thanh cuộn ngang */
+	  box-shadow: none;
+	  transition: all 0.3s ease;
+	  background: #242526; /* Giữ màu nền đồng nhất với menu mobile */
+	}
+	/* Thêm: Tùy chỉnh thanh cuộn cho mobile */
+	.nav-links .drop-menu::-webkit-scrollbar {
+	  width: 8px;
+	}
+	.nav-links .drop-menu::-webkit-scrollbar-track {
+	  background: #242526; /* Màu nền track trên mobile */
+	}
+	.nav-links .drop-menu::-webkit-scrollbar-thumb {
+	  background: #3a3b3c; /* Màu thanh cuộn */
+	  border-radius: 4px;
+	}
+	.nav-links .drop-menu::-webkit-scrollbar-thumb:hover {
+	  background: #555; /* Màu khi hover */
 	}
 	#showDrop:checked ~ .drop-menu,
 	#showMega:checked ~ .mega-box {
-		max-height: 100%;
+	  max-height: 100%;
 	}
 	.nav-links .desktop-item {
-		display: none;
+	  display: none;
 	}
 	.nav-links .mobile-item {
-		display: block;
-		color: #f2f2f2;
-		font-size: 20px;
-		font-weight: 500;
-		padding-left: 20px;
-		cursor: pointer;
-		border-radius: 5px;
-		transition: all 0.3s ease;
+	  display: block;
+	  color: #f2f2f2;
+	  font-size: 20px;
+	  font-weight: 500;
+	  padding-left: 20px;
+	  cursor: pointer;
+	  border-radius: 5px;
+	  transition: all 0.3s ease;
 	}
 	.nav-links .mobile-item:hover {
-		background: #3a3b3c;
+	  background: #3a3b3c;
 	}
 	.drop-menu li {
-		margin: 0;
+	  margin: 0;
 	}
 	.drop-menu li a {
-		border-radius: 5px;
-		font-size: 18px;
+	  border-radius: 5px;
+	  font-size: 18px;
+	  white-space: normal;
+	  padding: 0 15px;
 	}
 	.mega-box {
-		position: static;
-		top: 65px;
-		opacity: 1;
-		visibility: visible;
-		padding: 0 20px;
-		max-height: 0px;
-		overflow: hidden;
-		transition: all 0.3s ease;
+	  position: static;
+	  top: 65px;
+	  opacity: 1;
+	  visibility: visible;
+	  padding: 0 20px;
+	  max-height: 0px;
+	  overflow: hidden;
+	  transition: all 0.3s ease;
 	}
 	.mega-box .content {
-		box-shadow: none;
-		flex-direction: column;
-		padding: 20px 20px 0 20px;
+	  box-shadow: none;
+	  flex-direction: column;
+	  padding: 20px 20px 0 20px;
 	}
 	.mega-box .content .row {
-		width: 100%;
-		margin-bottom: 15px;
-		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	  width: 100%;
+	  margin-bottom: 15px;
+	  border-top: 1px solid rgba(255, 255, 255, 0.08);
 	}
 	.mega-box .content .row:nth-child(1),
 	.mega-box .content .row:nth-child(2) {
-		border-top: 0px;
+	  border-top: 0px;
 	}
 	.content .row .mega-links {
-		border-left: 0px;
-		padding-left: 15px;
+	  border-left: 0px;
+	  padding-left: 15px;
 	}
 	.row .mega-links li {
-		margin: 0;
+	  margin: 0;
 	}
 	.content .row header {
-		font-size: 19px;
+	  font-size: 19px;
 	}
-}
-nav.nav-app input {
+  }
+  nav.nav-app input {
 	display: none;
-}
-
-.body-text {
+  }
+  
+  .body-text {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -257,8 +300,8 @@ nav.nav-app input {
 	width: 100%;
 	text-align: center;
 	padding: 0 30px;
-}
-.body-text div {
+  }
+  .body-text div {
 	font-size: 45px;
 	font-weight: 600;
-}
+  }

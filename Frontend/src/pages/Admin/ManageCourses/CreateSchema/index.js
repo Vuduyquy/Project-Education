@@ -204,7 +204,7 @@ const CreateSchema = () => {
           dataSource={(listSchedules || []).map((schedule) => ({
             id: schedule?._id, // Kiểm tra null/undefined
             userCreated: schedule.userCreated.fullName,
-            course: schedule?.course.title || "N/A",
+            course: schedule?.course?.title || "N/A",
             timeStart: formatDate(schedule?.timeStart) || "N/A",
             timeEnd: formatDate(schedule?.timeEnd) || "N/A",
             type: schedule?.type || "N/A",

@@ -5,10 +5,11 @@ import Navigation from "./Navigation";
 import Sidebar from "./SideBar";
 import CustomFooter from "./Footer";
 
-const { Content } = Layout;
+const { Content, Header } = Layout;
 
 const DefaultLayout = () => {
   return (
+    <>
     <Layout style={{ minHeight: "100vh" }}>
       {/* Navigation cố định trên cùng */}
       <div
@@ -48,10 +49,10 @@ const DefaultLayout = () => {
           </Content>
         </Layout>
       </Layout>
-
       {/* Footer nằm ngoài Content nhưng vẫn trừ Sidebar */}
       <CustomFooter />
     </Layout>
+    </>
   );
 };
 

@@ -1,194 +1,3 @@
-// // import { notification, Table } from "antd";
-// // import React, { useEffect, useState } from "react";
-// // import { useNavigate } from "react-router-dom";
-// // import { useUserQuizzes } from "../../apis/user_quizz.api";
-
-// // const Transcript = () => {
-// //   const navigate = useNavigate();
-// //   const [api, contextHolder] = notification.useNotification();
-// //   const [listUserQuizz, setListUserQuizz] = useState([]);
-// //   //hook lấy danh sách đề thi
-// //   const { data: dataUserQuizz } = useUserQuizzes(
-// //     (data) => setListUserQuizz(data.data),
-// //     (error) =>
-// //       api.error({
-// //         message: "Không thể tải danh sách đề thi",
-// //         description: error.message,
-// //       })
-// //   );
-
-// //   useEffect(() => {
-// //     if (dataUserQuizz) {
-// //       setListUserQuizz(dataUserQuizz?.data?.data);
-// //     }
-// //   }, [dataUserQuizz]);
-
-// //   console.log("dữ liệu dataUserQuizz:", dataUserQuizz);
-
-// //   const columns = [
-// //     {
-// //       title: "Mã đề thi",
-// //       dataIndex: "idExam",
-// //       key: "idExam",
-// //     },
-// //     {
-// //       title: "Tên đề thi",
-// //       dataIndex: "title",
-// //       key: "title",
-// //     },
-// //     {
-// //       title: "Thời gian",
-// //       dataIndex: "duration",
-// //       key: "duration",
-// //     },
-// //     {
-// //       title: "Điểm",
-// //       dataIndex: "score",
-// //       key: "score",
-// //     },
-// //   ];
-
-
-// //   return (
-// //     <>
-// //       <div
-// //         style={{
-// //           marginTop: "32px",
-// //           display: "flex",
-// //           justifyContent: "space-between",
-// //         }}
-// //       >
-// //         <h1>Bảng điểm cá nhân</h1>
-// //       </div>
-// //       <div style={{ marginTop: "32px" }}>
-// //         <Table
-// //           columns={columns}
-// //           dataSource={
-// //             listUserQuizz.map((userquizz) => ({
-// //               key: userquizz._id,
-// // 			         idExam: userquizz._id,
-// //               //category: userquizz.quizId.category.title,
-// //               title: userquizz.quizId.title,
-// //               duration: userquizz.quizId.duration,
-// //               score: userquizz.score * 10
-// //             })) || []
-// //           }
-// //         />
-// //       </div>
-// //     </>
-// //   );
-// // };
-
-// // export default Transcript;
-
-
-// import { notification, Table } from "antd";
-// import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { useUserQuizzes } from "../../apis/user_quizz.api";
-
-
-// const Transcript = () => {
-//   const navigate = useNavigate();
-//   const [api, contextHolder] = notification.useNotification();
-//   const [listUserQuizz, setListUserQuizz] = useState([]);
-
-//   const getUserIdFromToken = () => {
-//     const token = localStorage.getItem("token");
-//     //console.log("token:", token);
-//     if (!token) return null;
-
-//     try {
-//       const payloadBase64 = token.split(".")[1]; // Lấy phần PAYLOAD từ JWT
-//       //console.log("payloadBase64", payloadBase64);
-//       const payload = JSON.parse(atob(payloadBase64)); // Giải mã Base64
-//       //console.log("payload", payload?._id);
-//       return payload?._id || null;
-//     } catch (error) {
-//       console.error("Lỗi giải mã token:", error);
-//       return null;
-//     }
-//   };
-
-//   const userId = getUserIdFromToken();
-
-//   // Hook lấy danh sách đề thi
-//   const { data: dataUserQuizz } = useUserQuizzes(
-//     (data) => setListUserQuizz(data.data),
-//     (error) =>
-//       api.error({
-//         message: "Không thể tải danh sách đề thi",
-//         description: error.message,
-//       })
-//   );
-
-//   useEffect(() => {
-//     if (dataUserQuizz && userId) {
-//       // Lọc danh sách chỉ lấy bài thi của người dùng hiện tại
-//       const userQuizzes = dataUserQuizz.data.data.filter(
-//         (quiz) => quiz.userId === userId
-//       );
-//       setListUserQuizz(userQuizzes);
-//     }
-//   }, [dataUserQuizz, userId]);
-
-//   console.log("Danh sách bài thi của người dùng:", listUserQuizz);
-
-//   const columns = [
-//     {
-//       title: "Mã đề thi",
-//       dataIndex: "idExam",
-//       key: "idExam",
-//     },
-//     {
-//       title: "Tên đề thi",
-//       dataIndex: "title",
-//       key: "title",
-//     },
-//     {
-//       title: "Thời gian(giây)",
-//       dataIndex: "duration",
-//       key: "duration",
-//     },
-//     {
-//       title: "Điểm",
-//       dataIndex: "score",
-//       key: "score",
-//     },
-//   ];
-
-//   return (
-//     <>
-//       {contextHolder}
-//       <div
-//         style={{
-//           marginTop: "32px",
-//           display: "flex",
-//           justifyContent: "space-between",
-//         }}
-//       >
-//         <h1>Bảng điểm cá nhân</h1>
-//       </div>
-//       <div style={{ marginTop: "32px" }}>
-//         <Table
-//           columns={columns}
-//           dataSource={
-//             listUserQuizz.map((userquizz) => ({
-//               key: userquizz._id,
-//               idExam: userquizz._id,
-//               title: userquizz.quizId.title,
-//               duration: userquizz.timeTaken,
-//               score: userquizz.score * 10,
-//             })) || []
-//           }
-//         />
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Transcript;
-
 import { notification, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -198,31 +7,14 @@ const Transcript = () => {
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
   const [listUserQuizz, setListUserQuizz] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); // Thêm trạng thái cho phân trang
+  const [pageSize] = useState(5); // Số bản ghi mỗi trang
 
-  const getUserIdFromToken = () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.error("Không tìm thấy token trong localStorage");
-      return null;
-    }
-
-    try {
-      const payloadBase64 = token.split(".")[1]; // Lấy phần PAYLOAD từ JWT
-      const payload = JSON.parse(atob(payloadBase64)); // Giải mã Base64
-      console.log("User ID từ token:", payload?._id);
-      return payload?._id || null;
-    } catch (error) {
-      console.error("Lỗi giải mã token:", error);
-      return null;
-    }
-  };
-
-  const userId = getUserIdFromToken();
-
-  // Hook lấy danh sách đề thi
-  const { data: dataUserQuizz } = useUserQuizzes(
+  const { data: dataUserQuizz, refetch } = useUserQuizzes(
+    currentPage, // Truyền page
+    pageSize, // Truyền limit
     (data) => {
-      console.log("Dữ liệu từ API useUserQuizzes:", data.data);
+      console.log("Dữ liệu từ API useUserQuizzes:", data);
     },
     (error) =>
       api.error({
@@ -232,17 +24,14 @@ const Transcript = () => {
   );
 
   useEffect(() => {
-    if (dataUserQuizz && userId) {
-      // Lọc danh sách chỉ lấy bài thi của người dùng hiện tại
-      const userQuizzes = dataUserQuizz.data.data.filter(
-        (quiz) => quiz.userId === userId
-      );
-      console.log("Danh sách bài thi sau khi lọc:", userQuizzes);
-      setListUserQuizz(userQuizzes);
+    if (dataUserQuizz) {
+      console.log("Danh sách bài thi:", dataUserQuizz.data.data);
+      const quizzes = Array.isArray(dataUserQuizz.data.data) ? dataUserQuizz.data.data : [];
+      setListUserQuizz(quizzes);
     } else {
-      console.log("Không có dữ liệu hoặc userId không hợp lệ:", { dataUserQuizz, userId });
+      console.log("Không có dữ liệu:", dataUserQuizz);
     }
-  }, [dataUserQuizz, userId]);
+  }, [dataUserQuizz]);
 
   const columns = [
     {
@@ -250,17 +39,18 @@ const Transcript = () => {
       dataIndex: "idExam",
       key: "idExam",
       render: (idExam) => {
-        const shortId = idExam.slice(0, 5); // Lấy 8 ký tự đầu tiên
-        return `MĐ_${shortId}`; // Thêm tiền tố EXAM-
+        const shortId = idExam.slice(0, 5);
+        return `MĐ_${shortId}`;
       },
     },
     {
       title: "Tên đề thi",
       dataIndex: "title",
       key: "title",
+      render: (title) => title || "Không có tên đề thi",
     },
     {
-      title: "Thời gian (giây)",
+      title: "Thời gian (phút)",
       dataIndex: "duration",
       key: "duration",
     },
@@ -270,6 +60,18 @@ const Transcript = () => {
       key: "score",
     },
   ];
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    refetch();
+  };
+
+  const tableStyle = {
+    border: "1px solid #e8e8e8",
+    borderRadius: "8px",
+    overflow: "hidden",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+  };
 
   return (
     <>
@@ -281,20 +83,51 @@ const Transcript = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1>Bảng điểm cá nhân</h1>
+        <h1 style={{ color: "black", fontSize: "20px" }}>Bảng điểm cá nhân</h1>
       </div>
-      <div style={{ marginTop: "32px" }}>
+      <div style={{ marginTop: "32px", maxHeight: "500px", overflow: "auto" }}>
         <Table
           columns={columns}
           dataSource={
-            listUserQuizz.map((userquizz) => ({
-              key: userquizz._id,
-              idExam: userquizz._id,
-              title: userquizz.quizId?.title,
-              duration: userquizz.timeTaken,
-              score: userquizz.score * 10,
-            })) || []
+            Array.isArray(listUserQuizz)
+              ? listUserQuizz.map((userquizz) => ({
+                  key: userquizz._id,
+                  idExam: userquizz._id,
+                  title: userquizz.quizId?.title || "Đề thi không hợp lệ",
+                  duration: userquizz.timeTaken,
+                  score: userquizz.score,
+                }))
+              : []
           }
+          pagination={{
+            current: currentPage,
+            pageSize: pageSize,
+            total: dataUserQuizz?.pagination?.total || 0,
+            onChange: handlePageChange,
+            showSizeChanger: false,
+            showTotal: (total) => `Tổng ${total} bài thi`,
+            itemRender: (current, type, originalElement) => {
+              if (type === "prev") return <a style={{ color: "#1890ff", fontWeight: "bold", padding: "5px 10px" }}>Trước</a>;
+              if (type === "next") return <a style={{ color: "#1890ff", fontWeight: "bold", padding: "5px 10px" }}>Sau</a>;
+              return originalElement;
+            },
+          }}
+          style={tableStyle}
+          components={{
+            header: {
+              cell: (props) => (
+                <th
+                  {...props}
+                  style={{ backgroundColor: "#1890ff", color: "white", fontSize: "13px", padding: "12px", textAlign: "center" }}
+                />
+              ),
+            },
+          }}
+          rowClassName={() => "custom-row"}
+          onRow={() => ({
+            onMouseEnter: (event) => { event.currentTarget.style.backgroundColor = "#f0f0f0"; event.currentTarget.style.transition = "all 0.3s"; },
+            onMouseLeave: (event) => { event.currentTarget.style.backgroundColor = "white"; },
+          })}
         />
       </div>
     </>

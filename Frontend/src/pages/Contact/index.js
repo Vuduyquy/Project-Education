@@ -18,7 +18,11 @@ const Contact = () => {
   const handleChangeDecription = (event) => {
     setDescription(event.target.value);
   };
-  const { mutate: createContact, error } = useCreateContact();
+  const { mutate: createContact, error } = useCreateContact(
+    () => {
+      api.success({ message: "Gửi câu trả lời thành công!" });
+    }
+  );
 
   const handleCreateContact = async () => {
     setIsLoading(true);
@@ -65,7 +69,7 @@ const Contact = () => {
           justifyContent: "space-between",
         }}
       >
-        <h1>Đóng góp ý kiến</h1>
+        <h1 style={{ color: "black", fontSize: "20px" }}>Đóng góp ý kiến</h1>
       </div>
       <Card style={{ marginTop: "32px" }}>
         <div style={{ position: "relative" }}>
@@ -75,15 +79,16 @@ const Contact = () => {
         </div>
         <Form name="basic" layout="vertical">
           <Form.Item label="Họ và tên">
-            <Input size="large" value={name} onChange={handleChangeName} />
+            <Input style={{backgroundColor: "#f5f7fa"}} size="large"  value={name} onChange={handleChangeName} />
           </Form.Item>
 
           <Form.Item label="Địa chỉ email">
-            <Input size="large" value={email} onChange={handleChangeEmail} />
+            <Input style={{backgroundColor: "#f5f7fa"}} size="large" value={email} onChange={handleChangeEmail} />
           </Form.Item>
 
           <Form.Item label="Ý kiến của bạn">
             <Input.TextArea
+              style={{backgroundColor: "#f5f7fa"}}
               size="large"
               value={description}
               onChange={handleChangeDecription}

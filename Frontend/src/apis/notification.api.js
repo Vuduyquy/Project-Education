@@ -34,7 +34,7 @@ export const useGetNotifications = () => {
     queryKey: ["notifications"],
     queryFn: async () => {
       const response = await notifications.getNotifications();
-      console.log("Notifications API Response:", response);
+      //console.log("Notifications API Response:", response);
       return response.data;
     },
     enabled: !!localStorage.getItem("token"), // Chỉ fetch khi có 

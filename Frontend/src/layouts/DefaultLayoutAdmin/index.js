@@ -4,6 +4,7 @@ import {
 	FileTextOutlined,
 	LoginOutlined,
 	MailOutlined,
+	QuestionCircleOutlined,
 	UserOutlined,
 	YoutubeOutlined,
 } from '@ant-design/icons';
@@ -76,7 +77,7 @@ const DefaultLayoutAdmin = (props) => {
 		},
 		{
 			key: 'mange-question',
-			icon: <EditOutlined />,
+			icon: <QuestionCircleOutlined />,
 			label: 'Câu hỏi',
 			children: [
 				{

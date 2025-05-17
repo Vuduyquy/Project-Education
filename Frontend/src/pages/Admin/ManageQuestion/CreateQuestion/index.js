@@ -119,7 +119,6 @@ const CreateQuestion = () => {
       setQuestions([{ questionText: '', questionType: 'essay', answers: [], difficulty: 'easy' }]);
       form.resetFields();
     } catch (error) {
-      console.error('Lỗi khi gửi câu hỏi:', error);
       message.error('Lỗi khi tạo câu hỏi: ' + (error.response?.data?.message || error.message));
     }
   };

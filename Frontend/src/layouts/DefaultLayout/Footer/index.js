@@ -8,8 +8,8 @@ const CustomFooter = () => {
     <Footer
       style={{
         position: "relative",
-        backgroundColor: "#141414",
-        color: "white",
+        backgroundColor: "black",
+        color: "gray",
         padding: "40px 80px",
         textAlign: "left",
         width: "calc(100% - 250px)", // Trừ đi Sidebar 250px
@@ -27,7 +27,7 @@ const CustomFooter = () => {
       >
         {/* Cột 1: Logo + thông tin liên hệ */}
         <div>
-          <h3 style={{ color: "#ff6600" }}>F8 - Học Lập Trình Để Đi Làm</h3>
+          <h3 style={{ color: "#ff6600" }}> Học Lập Trình Để Đi Làm</h3>
           <p>📞 Điện thoại: 08 1919 8989</p>
           <p>📧 Email: contact@fullstack.edu.vn</p>
           <p>📍 Địa chỉ: Số 1, ngõ 41, Trần Duy Hưng, Cầu Giấy, Hà Nội</p>
@@ -35,7 +35,7 @@ const CustomFooter = () => {
 
         {/* Cột 2: Về F8 */}
         <div>
-          <h3>VỀ F8</h3>
+          <h3>Về education</h3>
           <p>Giới thiệu</p>
           <p>Liên hệ</p>
           <p>Điều khoản</p>

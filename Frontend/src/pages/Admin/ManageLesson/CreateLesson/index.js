@@ -120,7 +120,7 @@ const CreateLesson = () => {
         {
           onSuccess: async (createdLesson) => {
             console.log("Created Lesson Response:", createdLesson);
-            const lessonId = createdLesson?.data?.data?._id;
+            const lessonId = createdLesson?.data?._id;
   
             if (lessonId) {
               // Tìm khóa học đã chọn từ danh sách khóa học

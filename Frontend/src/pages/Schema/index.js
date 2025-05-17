@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { Table, Card, Button, message, notification } from "antd";
 import { useGetAllSchedules, useJoinSchedule } from "../../apis/schedule.api";
@@ -118,7 +116,7 @@ const Schema = () => {
   return (
     <Card style={{ maxWidth: "90%", margin: "auto", padding: 20, maxHeight: "80vh", overflowY: "auto" }}>
       {contextHolder}
-      <h2 style={{ textAlign: "center" }}>Lịch Cá Nhân</h2>
+      <h2 style={{ textAlign: "center", fontWeight: "bold", paddingBottom: "20px", fontSize: "24px", color: "#1890ff" }}>Lịch Cá Nhân</h2>
       <Table
         columns={columns}
         dataSource={(listSchedules || []).map((schedule) => ({

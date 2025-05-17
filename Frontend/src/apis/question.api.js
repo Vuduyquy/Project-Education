@@ -39,8 +39,6 @@ export const useGetQuestions = (onSuccess, onError) => {
     },
     onSuccess,
     onError,
-    staleTime: 5 * 60 * 1000, // 5 phút
-    cacheTime: 10 * 60 * 1000, // 10 phút
   });
 };
 

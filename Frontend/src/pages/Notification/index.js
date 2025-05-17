@@ -116,7 +116,7 @@ const NotificationPage = () => {
                     <Avatar
                       icon={<BellOutlined />}
                       style={{
-                        backgroundColor: item.seen ? "#d9d9d9" : "#1890ff",
+                        backgroundColor: item.seen ? "#ff6b1c" : "#1890ff",
                         color: "#fff",
                       }}
                     />
