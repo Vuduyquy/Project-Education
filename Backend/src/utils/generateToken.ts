@@ -8,6 +8,15 @@ const generateToken = (user: IUser) => {
 	});
 };
 
-export default generateToken;
-
+const generateRefreshToken = (user: IUser) => {
+	return jwt.sign(
+	  { _id: user._id, fullName: user.fullName, role: user.role },
+	  config.JWT_REFRESH_SECRET, // Sử dụng secret riêng cho refresh token
+	  {
+		expiresIn: '30d', // Thời gian sống lâu hơn, ví dụ 30 ngày
+	  }
+	);
+  };
+  
+  export { generateToken, generateRefreshToken };
 

@@ -107,53 +107,6 @@ export const updateQuestion = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-// export const updateQuestion = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-//   try {
-//     const { id } = req.params;
-//     const { questionText, answers, quizId, questionType, difficulty } = req.body;
-
-//     // Tính toán answerCorrect (chỉ cho single_choice)
-//     let answerCorrect: string | undefined = undefined;
-//     const existingQuestion = await Question.findById(id);
-//     if (!existingQuestion) {
-//       res.status(404).json({ message: 'Không tìm thấy câu hỏi để cập nhật' });
-//       return;
-//     }
-
-//     const finalQuestionType = questionType || existingQuestion.questionType;
-//     const type = Array.isArray(finalQuestionType) && finalQuestionType.length > 0 ? finalQuestionType[0] : undefined;
-
-//     if (type === 'single_choice') {
-//       const correctAnswers = answers
-//         .filter((answer: { answerText: string; isCorrect: boolean }) => answer.isCorrect)
-//         .map((answer: { answerText: string; isCorrect: boolean }) => answer.answerText);
-
-//       // Kiểm tra validation cho single_choice
-//       if (correctAnswers.length !== 1) {
-//         res.status(400).json({ message: 'Câu hỏi single_choice phải có đúng 1 đáp án đúng' });
-//         return;
-//       }
-
-//       answerCorrect = correctAnswers[0]; // Lấy đáp án đúng duy nhất
-//     }
-
-//     const question = await Question.findByIdAndUpdate(
-//       id,
-//       { questionText, answers, quizId, questionType: finalQuestionType, difficulty, answerCorrect },
-//       { new: true }
-//     );
-
-//     if (!question) {
-//       res.status(404).json({ message: 'Không tìm thấy câu hỏi để cập nhật' });
-//       return;
-//     }
-
-//     res.status(200).json({ message: 'Cập nhật câu hỏi thành công', question });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 export const deleteQuestion = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const { id } = req.params;

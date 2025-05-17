@@ -34,7 +34,7 @@ export const sendEmail = async (to: string, subject: string, text: string) => {
         };
 
         await transporter.sendMail(mailOptions);
-        console.log(`📧 Email đã gửi đến ${to}`);
+       // console.log(`📧 Email đã gửi đến ${to}`);
     } catch (error:any) {
         console.error("❌ Lỗi khi gửi email:", error.message);
         throw new Error(`Không thể gửi email: ${error.message}`);

@@ -27,16 +27,46 @@ const submitQuiz = async (req: RequestCustom, res: Response): Promise<any> => {
     }
 };
 
+// const getUserQuizzes = async (req: RequestCustom, res: Response): Promise<any> => {
+//     try {
+//         const userId = req.user?._id;
+//         const userQuizzes = await usersQuizzesService.getUserQuizzesByUserId(
+//             new mongoose.Types.ObjectId(userId)
+//         );
+
+//         return res.status(200).json({
+//             message: 'Lấy danh sách bài thi thành công',
+//             data: userQuizzes
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             message: 'Đã có lỗi xảy ra',
+//             error
+//         });
+//     }
+// };
+
 const getUserQuizzes = async (req: RequestCustom, res: Response): Promise<any> => {
     try {
         const userId = req.user?._id;
-        const userQuizzes = await usersQuizzesService.getUserQuizzesByUserId(
-            new mongoose.Types.ObjectId(userId)
+        const page = parseInt(req.query.page as string) || 1; // Lấy page từ query, mặc định là 1
+        const limit = parseInt(req.query.limit as string); // Lấy limit từ query, mặc định là 5
+
+        const result = await usersQuizzesService.getUserQuizzesByUserId(
+            new mongoose.Types.ObjectId(userId),
+            page,
+            limit
         );
 
         return res.status(200).json({
             message: 'Lấy danh sách bài thi thành công',
-            data: userQuizzes
+            data: result.data,
+            pagination: {
+                total: result.total,
+                page: result.page,
+                limit: result.limit,
+                totalPages: Math.ceil(result.total / result.limit),
+            },
         });
     } catch (error) {
         return res.status(500).json({

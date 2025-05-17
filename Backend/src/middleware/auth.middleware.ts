@@ -23,10 +23,10 @@ const authMiddleware = (
     const bearerToken = token.split(" ")[1]; // Tách ra token từ 'Bearer <token>'
 
     const decoded = jwt.verify(bearerToken, config.JWT_SECRET) as UserPayload;
-    console.log('decode', decoded)
+    //console.log('decode', decoded)
 
     req.user = { _id: decoded._id, role: decoded.role };
-    console.log("✅ Gán req.user thành công:", req.user);
+    //console.log("✅ Gán req.user thành công:", req.user);
   
     next();
   } catch (error) {

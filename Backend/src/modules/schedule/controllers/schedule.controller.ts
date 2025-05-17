@@ -6,15 +6,6 @@ import mongoose from 'mongoose';
 export const createSchedule = async (req: RequestCustom, res: Response) => {
     try {
         console.log("Request body:", req.body); // 🐞 Kiểm tra dữ liệu gửi đến API
-        
-        // if (!req.body) {
-        //     return res.status(400).json({ message: "Dữ liệu request bị trống!" });
-        // }
-        //const userId = req.user?._id;
-
-        // if (!userId) {
-        //     return res.status(400).json({ message: "Không tìm thấy userId" });
-        // }
 
         const scheduleData = {
             ...req.body,
@@ -36,36 +27,6 @@ export const createSchedule = async (req: RequestCustom, res: Response) => {
     }
 
 };
-
-// export const createSchedule = async (req: RequestCustom, res: Response) => {
-//     try {
-//         console.log("Request body received by API:", req.body); // Kiểm tra request
-//         const userId = req.user?._id;
-
-//         if (!userId) {
-//             return res.status(400).json({ message: "Không tìm thấy userId" });
-//         }
-
-//         const scheduleData = {
-//             ...req.body,
-//             userCreated: userId
-//         };
-
-//         console.log("Final scheduleData before saving:", scheduleData); // Kiểm tra dữ liệu trước khi lưu
-
-//         const schedule = await scheduleService.createSchedule(scheduleData);
-//         res.status(201).json({
-//             message: 'Tạo lịch hẹn thành công',
-//             data: schedule
-//         });
-//     } catch (error) {
-//         console.error("Lỗi khi tạo lịch:", error);
-//         res.status(500).json({
-//             message: 'Đã có lỗi xảy ra',
-//             error
-//         });
-//     }
-// };
 
 
 export const getScheduleById = async (req: RequestCustom, res: Response) => {

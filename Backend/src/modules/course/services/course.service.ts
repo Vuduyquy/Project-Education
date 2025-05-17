@@ -5,17 +5,43 @@ export async function createCourse(courseData: Partial<ICourse>) {
   return await Course.create(courseData);
 }
 
-export async function getAllCourses() {
-  return await Course.find()
-    .populate('instructorId')
-    .populate('lessons','title resources')
-    .populate('reviews')
-    .populate('users','fullName');
+export async function getAllCourses(page: number = 1, limit: number = 5) {
+  // Chuyển đổi page và limit thành số nguyên, đảm bảo giá trị hợp lệ
+  const pageNumber = Math.max(1, parseInt(String(page), 10));
+  const pageSize = Math.max(1, parseInt(String(limit), 10));
+
+  // Tính số bản ghi cần bỏ qua
+  const skip = (pageNumber - 1) * pageSize;
+
+  // Lấy danh sách khóa học với phân trang
+  const courses = await Course.find()
+  .populate({
+    path: 'instructorId',
+    select: '_id fullName'
+  })
+    .populate('lessons', 'title resources')
+    .populate({
+      path: 'reviews',
+      populate: { path: 'userId', select: 'fullName' },
+    })
+    .populate('users', 'fullName')
+    .skip(skip)
+    .limit(pageSize);
+
+  // Đếm tổng số khóa học
+  const total = await Course.countDocuments();
+
+  return {
+    data: courses,
+    total,
+    page: pageNumber,
+    limit: pageSize,
+  };
 }
 
 export async function getCourseById(id: string) {
   return await Course.findById(id)
-    .populate('instructorId')
+    .populate('instructorId', 'fullName')
     .populate('lessons')
     .populate({
       path: "reviews",
@@ -23,22 +49,6 @@ export async function getCourseById(id: string) {
     })
     .populate('users', 'fullName');
 }
-
-// export const updateCourse = async (id: string, updateData: Partial<ICourse>): Promise<ICourse | null> => {
-//   console.log('updateData:', updateData)
-//     const course = await Course.findById(id);
-//     if (!course) return null;
-
-//     // Cập nhật các khóa học mới (nếu có)
-//     if (updateData.lessons) {
-//       const lessonsArray = Array.isArray(updateData.lessons) ? updateData.lessons : [updateData.lessons];
-//       course.lessons = Array.from(new Set([...course.lessons, ...lessonsArray]));
-//     }
-    
-
-//     Object.assign(course, updateData);
-//     return await course.save();
-// };
 
 export async function updateCourse(id: string, updateData: Partial<ICourse>) {
   return await Course.findByIdAndUpdate(
@@ -53,4 +63,5 @@ export async function updateCourse(id: string, updateData: Partial<ICourse>) {
 export async function deleteCourse(id: string) {
   return await Course.findByIdAndDelete(id);
 }
+
 

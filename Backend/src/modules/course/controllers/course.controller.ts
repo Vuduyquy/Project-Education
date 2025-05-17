@@ -42,23 +42,33 @@ export const handleCreateCourse: RequestHandler<{}, any, CourseRequest['body']> 
 
 export const handleGetAllCourses: RequestHandler = async (req, res) => {
   try {
-    const courses = await getAllCourses();
+    // Lấy page và limit từ query string, mặc định page=1, limit=5
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string);
+
+    const result = await getAllCourses(page, limit);
     res.status(200).json({
       success: true,
       message: 'Lấy danh sách khóa học thành công',
-      data: courses
+      data: result.data,
+      pagination: {
+        total: result.total,
+        page: result.page,
+        limit: result.limit,
+        totalPages: Math.ceil(result.total / result.limit),
+      },
     });
   } catch (error) {
     if (error instanceof CustomError) {
       res.status(error.statusCode).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     } else {
       res.status(500).json({
         success: false,
         message: 'Lỗi server',
-        error: process.env.NODE_ENV === 'development' ? error : undefined
+        error: process.env.NODE_ENV === 'development' ? error : undefined,
       });
     }
   }
